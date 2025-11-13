@@ -17,7 +17,7 @@ function Layout() {
       <header className={headerStyle.header}>
         <div>Router Practice</div>
         <div className={headerStyle.headerLinks}>
-          <Link to="/">Home</Link>
+          <Link to="/home">Home</Link>
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
           <Link to={`/${Math.random(10)}`}>Random</Link>
@@ -34,8 +34,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
+          <Route path="home" element={<HomePage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="contact" element={<ContactPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
