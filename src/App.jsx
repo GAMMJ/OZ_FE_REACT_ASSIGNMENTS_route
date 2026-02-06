@@ -1,5 +1,10 @@
-import "./App.css";
-import headerStyle from "./assets/styles/header.module.css";
+import { BrowserRouter, Outlet, Route, Routes, Link } from "react-router-dom"
+import "./App.css"
+import headerStyle from "./assets/styles/header.module.css"
+import HomePage from "./pages/HomePage"
+import AboutPage from "./pages/AboutPage"
+import ContactPage from "./pages/ContactPage"
+import ErrorPage from "./pages/ErrorPage"
 /* Layout 컴포넌트
 1. /home으로 라우팅할 수 있는 <Link/>를 선언하세요.
 2. /about으로 라우팅할 수 있는 <Link/>를 선언하세요.
@@ -15,11 +20,24 @@ function Layout() {
         <div>Router Practice</div>
         <div className={headerStyle.headerLinks}>
           {/* 여기에 Link 컴포넌트를 할당하세요. */}
+          <Link to="/home">
+            <div>홈페이지 이동</div>
+          </Link>
+          <Link to="/about">
+            <div>어바웃페이지 이동</div>
+          </Link>
+          <Link to="/contact">
+            <div>컨텍트페이지 이동</div>
+          </Link>
+          <Link to={`/${Math.random()}`}>
+            <div>에러페이지 이동</div>
+          </Link>
         </div>
       </header>
       {/* 이곳에 Outlet을 할당하세요. */}
+      <Outlet />
     </>
-  );
+  )
 }
 
 /* App 컴포넌트
@@ -33,7 +51,19 @@ function Layout() {
 8. /* 모든 잘못된 라우팅에서 보이는 <ErrorPage/> 컴포넌트를 라우팅에 연결하세요.
 */
 function App() {
-  return <></>;
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />}></Route>
+          <Route path="/home" element={<HomePage />}></Route>
+          <Route path="/about" element={<AboutPage />}></Route>
+          <Route path="/contact" element={<ContactPage />}></Route>
+          <Route path="*" element={<ErrorPage />}></Route>
+        </Route>
+      </Routes>
+    </>
+  )
 }
 
-export default App;
+export default App
